@@ -8,22 +8,51 @@
     </head>
     <body>
         <!--  - need to change semetic elements -->
-        <div> 
+        <nav id = "nav"> 
             <!-- high score -->
             <div>
-                <button class = "btnhighScore">
+                <button class = "btnhighScore" onclick="moveHighScorePage()">
                     high score
                 </button>
             </div>
             <!-- timer -->
             <div class = "QuizTimer">
-                
+                60
             </div>
-        </div>
+        </nav>
         <!-- box that houses everything -->
         <main class = "mainArea">
-            
+            <div id = homePage>
+                <h1>code quiz</h1>
+                <div>this is a quiz</div>
+                <button id = start onclick="moveQuestionPage()">start</button>
+            </div>
+            <div id = questionPage>            
+                <h1 id = "mainAreaTitle"></h1>
+                <div id = "A"></div>
+                <div id = "B"></div>
+                <div id = "C"></div>
+                <div id = "D"></div>
+            </div>
+            <div id = gameOverPage>
+                <h1></h1>
+                <div></div>
+                <label for="inital">Initials:</label>
+                <input type="text">
+                <button>Record</button>
+            </div>
+            <div id = highScorePage>
+                <h1>high score</h1>
+                <ul>
+
+                </ul>
+                <button onclick="moveHomePage()">Back</button>
+                <button>Clear Score</button>
+            </div>
+
         </main>
+
+
         <script src="assets/js/script.js"></script>
     </body>
 </html>
