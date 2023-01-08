@@ -11,13 +11,13 @@
         <nav id = "nav"> 
             <!-- high score -->
             <div>
-                <button class = "btnhighScore" onclick="moveHighScorePage()">
+                <button id = "btnhighScore" onclick="moveHighScorePage()">
                     high score
                 </button>
             </div>
             <!-- timer -->
-            <div class = "QuizTimer">
-                60
+            <div id = "QuizTimer">
+                10
             </div>
         </nav>
         <!-- box that houses everything -->
@@ -29,17 +29,17 @@
             </div>
             <div id = questionPage>            
                 <h1 id = "mainAreaTitle"></h1>
-                <div id = "A"></div>
-                <div id = "B"></div>
-                <div id = "C"></div>
-                <div id = "D"></div>
+                <div id = "A" onclick="check('1')"></div>
+                <div id = "B" onclick="check('2')"></div>
+                <div id = "C" onclick="check('3')"></div>
+                <div id = "D" onclick="check('4')"></div>
             </div>
             <div id = gameOverPage>
                 <h1></h1>
-                <div></div>
+                <div id="Score"></div>
                 <label for="inital">Initials:</label>
                 <input type="text">
-                <button>Record</button>
+                <button onclick="moveHighScorePage()">Record</button>
             </div>
             <div id = highScorePage>
                 <h1>high score</h1>
