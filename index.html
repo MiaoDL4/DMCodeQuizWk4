@@ -17,7 +17,7 @@
             </div>
             <!-- timer -->
             <div id = "QuizTimer">
-                10
+                60
             </div>
         </nav>
         <!-- box that houses everything -->
@@ -38,16 +38,16 @@
                 <h1></h1>
                 <div id="Score"></div>
                 <label for="inital">Initials:</label>
-                <input type="text">
-                <button onclick="moveHighScorePage()">Record</button>
+                <input type="text" id="initals" >
+                <button onclick="record()">Record</button>
             </div>
             <div id = highScorePage>
                 <h1>high score</h1>
-                <ul>
+                <ul id="scoreDisplay">
 
                 </ul>
                 <button onclick="moveHomePage()">Back</button>
-                <button>Clear Score</button>
+                <button onclick="clearRecord()">Clear Score</button>
             </div>
 
         </main>

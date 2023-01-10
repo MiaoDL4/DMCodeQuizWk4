@@ -14,12 +14,11 @@ var cho3 = document.getElementById("C");
 var cho4 = document.getElementById("D");
 var start = document.getElementById("start");
 
+var scoreDisplay = document.getElementById("scoreDisplay");
+var initalsInput = document.getElementById("initals");
 var recordScore;
 var Timer;
 var count = 60;
-
-
-
 
 function check(answer){
     if(questionsArray[runningQuestionIndex].correctAr == answer && runningQuestionIndex < lastQuestionIndex){
@@ -27,8 +26,8 @@ function check(answer){
         runningQuestionIndex++;
         showQuestion();
     }else if(questionsArray[runningQuestionIndex].correctAr != answer &&    runningQuestionIndex < lastQuestionIndex){
-        if(count > 15 ){
-            count = count - 15;
+        if(count > 10 ){
+            count = count - 10;
         } else {
             count = 0;
         }
@@ -58,11 +57,9 @@ function timer(){
     }
 }
 
-
-
 var questionsArray = [
     {//q1
-        questionAr : "Javascript is an _______ language?0",
+        questionAr : "Javascript is an _______ language?",
         choice1Ar : "Object Oriented",
         choice2Ar : "Object Based",
         choice3Ar : "Procedural",
@@ -70,15 +67,15 @@ var questionsArray = [
         correctAr : "1"
     },
     {//q2
-        questionAr : "Javascript is an _______ language?1",
-        choice1Ar : "Object Oriented",
-        choice2Ar : "Object Based",
-        choice3Ar : "Procedural",
-        choice4Ar : "Scipting",
-        correctAr : "1"
+        questionAr : "How can a datatype be declared to be a Variable type?",
+        choice1Ar : "Const",
+        choice2Ar : "Let",
+        choice3Ar : "Int",
+        choice4Ar : "Var",
+        correctAr : "4"
     },
     {//q3
-        questionAr : "Javascript is an _______ language?2",
+        questionAr : "How to stop an interval timer in Javascript?",
         choice1Ar : "Object Oriented",
         choice2Ar : "Object Based",
         choice3Ar : "Procedural",
@@ -86,27 +83,27 @@ var questionsArray = [
         correctAr : "1"
     },
     {//q4
-        questionAr : "Javascript is an _______ language?3",
-        choice1Ar : "Object Oriented",
-        choice2Ar : "Object Based",
-        choice3Ar : "Procedural",
-        choice4Ar : "Scipting",
-        correctAr : "1"
+        questionAr : "Which of the following methods can be used to display data in some form using Javascript?",
+        choice1Ar : "Cocument.write()",
+        choice2Ar : "Console.log()",
+        choice3Ar : "Window.alert()",
+        choice4Ar : "All of the above",
+        correctAr : "4"
     },
     {//q5
-        questionAr : "Javascript is an _______ language?4",
-        choice1Ar : "Object Oriented",
-        choice2Ar : "Object Based",
-        choice3Ar : "Procedural",
-        choice4Ar : "Scipting",
-        correctAr : "1"
+        questionAr : "What keyword is used to check whether a given property is valid or not?",
+        choice1Ar : "is in",
+        choice2Ar : "in",
+        choice3Ar : "exists",
+        choice4Ar : "Truth",
+        correctAr : "2"
     },
     {//q6
-        questionAr : "Javascript is an _______ language?5",
-        choice1Ar : "Object Oriented",
-        choice2Ar : "Object Based",
-        choice3Ar : "Procedural",
-        choice4Ar : "Scipting",
+        questionAr : "Which function is used to serialize an object into a JSON string in Javascript?",
+        choice1Ar : "convert()",
+        choice2Ar : "parse()",
+        choice3Ar : "stringify()",
+        choice4Ar : "None of the above",
         correctAr : "1"
     }
 ]
@@ -122,7 +119,6 @@ function showQuestion(){
     console.log(q)
 }
 
-
 //function for movement between pages
 function moveHomePage(){
     console.log('show homepage div')
@@ -130,8 +126,9 @@ function moveHomePage(){
     nav.style.visibility = "visible";
     dHomePage.style.display = "block";
     runningQuestionIndex = 0;
-    count = 10;
-
+    count = 60;
+    quizTimer.innerHTML = count;
+    scoreDisplay.innerHTML = '';
 }
 
 function moveQuestionPage(){
@@ -152,13 +149,17 @@ function moveGameOverPage(){
     score.innerHTML = scoreRecord;
 }
 
-function record(){
+function record(event){
     console.log('show highscore div via record')
+    highscoreStorage()
+    
     dHomePage.style.display = "none";
     dQuestion.style.display = "none";
     dGameOverPage.style.display = "none";
     nav.style.visibility = "hidden";
     dHighScorePage.style.display = "block";
+    showHighScores()
+    initalsInput.value = '';
 }
 
 function moveHighScorePage(){
@@ -169,4 +170,53 @@ function moveHighScorePage(){
     nav.style.visibility = "hidden";
     dHighScorePage.style.display = "block";
     clearInterval(Timer)
+    showHighScores()
 }
+
+
+var Highscores = [];
+
+function highscoreStorage(){
+    if (initals.value !== '') {
+        var playerHighscore = {
+            time: Date.now(), 
+            init: document.getElementById('initals').value,
+            scoreR: document.getElementById('Score').textContent
+        }
+
+    }else{
+        var playerHighscore = {
+            time: Date.now(), 
+            init: "Unknown",
+            scoreR: document.getElementById('Score').textContent
+        }
+    }
+    Highscores.push(playerHighscore);
+    var sort = Highscores.sort(({scoreR:a}, {scoreR:b}) => b-a);
+    localStorage.setItem('playerScoreList', JSON.stringify(Highscores));
+}
+
+function clearRecord(){
+    Highscores = [];
+    window.localStorage.removeItem("playerScoreList");
+    scoreDisplay.innerHTML = '';
+}
+
+
+
+function showHighScores() {
+    var playerScoreList = localStorage.getItem("playerScoreList");
+  
+    if (playerScoreList.length == 0) {
+        return;
+    }
+  
+    var storedHighScores = JSON.parse(playerScoreList);
+    //console.log(storedHighScores)
+    for (i = 0; i < storedHighScores.length; i++) {
+        var newHighscore = document.createElement("li");
+        newHighscore.innerHTML = storedHighScores[i].init + ": " + storedHighScores[i].scoreR;
+        scoreDisplay.appendChild(newHighscore);
+    }
+    console.log(playerScoreList);
+  }
