@@ -21,7 +21,7 @@ N/A
 
 follow the buttons and enjoy
 
-![image of home page](./assets/readMeImages/1.png)
+![image of home page](./assets/readMeImages/1.PNG)
 
 ![image of question page](./assets/readMeImages/2.png)
 
