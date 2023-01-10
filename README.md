@@ -23,11 +23,11 @@ follow the buttons and enjoy
 
 ![image of home page](./assets/readMeImages/1.PNG)
 
-![image of question page](./assets/readMeImages/2.png)
+![image of question page](./assets/readMeImages/2.PNG)
 
-![image of game over page](./assets/readMeImages/3.png)
+![image of game over page](./assets/readMeImages/3.PNG)
 
-![image of high score page](./assets/readMeImages/4.png)
+![image of high score page](./assets/readMeImages/4.PNG)
 
 
 
